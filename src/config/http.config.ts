@@ -19,4 +19,4 @@ const httpConfig = () => ({
 })
 
 export const HTTPSTATUS = httpConfig();
-
+export type HttpStatusCodeType = (typeof HTTPSTATUS)[keyof typeof HTTPSTATUS]

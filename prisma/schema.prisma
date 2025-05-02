@@ -32,6 +32,8 @@ model User {
 
 model Workspace {
   workspace_id  Int       @id @default(autoincrement()) 
+  name String
+  description String
   owner_id      String
   inviteCode    String    @unique
   created_at    DateTime  @default(now())
@@ -58,7 +60,7 @@ model Account {
 
 model Role {
   id           String           @id @default(uuid())   
-  name         ROLES
+  name         ROLES @unique
   permissions  Permissions[]    
   members      Member[]  
   createdAt    DateTime         @default(now())
