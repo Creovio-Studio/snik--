@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { createUser } from "@/prisma-action/create.user";
 import { NotFoundException } from "@/utils/app-error";
 import { generateInviteCode } from "@/utils/uuid";
 
@@ -15,7 +16,7 @@ export const registerUserServices = async (body:{
                 throw new Error("Email already Exists")
             }
     
-            const user = await tx.user.create({data:{name, email, password}});
+           const user = await createUser(tx, {name, email, password});
             
            await tx.account.create({data:{
             user_id:user.user_id,
@@ -32,10 +33,11 @@ export const registerUserServices = async (body:{
             }
            })
     
-    
-           const ownerRole = await tx.role.findUnique({
+           const ownerRole = await tx.role.findFirst({
             where: { name: 'OWNER'}
           });
+
+          console.log(ownerRole);
     
           if(!ownerRole){
             throw new NotFoundException("Owner role not found");
