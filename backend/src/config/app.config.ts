@@ -1,4 +1,4 @@
-import {getEnv} from "../utils/get-env.ts"
+import {getEnv} from "../utils/get-env"
 
 const appConfig = () => ({
     NODE_ENV:getEnv("NODE_ENV", "development"),
@@ -6,8 +6,8 @@ const appConfig = () => ({
     BASE_PATH:getEnv("BSAE_PATH", "/api"),
     DATABASE_URL: getEnv("DATABASE_URL"),
     
-    SESSION_SECRET:getEnv("SESSION_SECRET"),
-    SESSION_EXPIRES_IN:getEnv("SESSION_EXPIRES_IN"),
+    JWT_SECRET:getEnv("JWT_SECRET"),
+    JWT_EXPIRES_IN:getEnv("JWT_EXPIRES_IN"),
 
     FRONTEND_ORIGIN:getEnv("FRONTEND_ORIGIN", "localhost"),
 })
