@@ -1,0 +1,8 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+# .gitignore
+/src/config/firebase.admin.config.json
+/src/config/firebase.config.json
+

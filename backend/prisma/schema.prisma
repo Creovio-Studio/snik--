@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  user_id        String        @id @default(uuid())
+  name           String
+  email          String     @unique
+  password       String
+  profile_picture String?
+  current_workspace String?    @unique
+  is_active      Boolean    @default(true)
+  last_login     DateTime?
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @updatedAt
+
+  accounts       Account[]
+  projects       Project[]  @relation("UserCreatedProjects")
+  tasksCreated   Task[]     @relation("TaskCreatedBy")
+  tasksAssigned  Task[]     @relation("TaskAssignedTo")
+  memberships    Member[]
+
+  workspaces Workspace[] @relation("UserOwnsWorkspaces")
+
+  @@index([email])
+}
+
+model Workspace {
+  workspace_id  String       @id @default(uuid()) 
+  name String
+  description String?
+  owner_id      String   
+  inviteCode    String    @unique
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  owner         User      @relation("UserOwnsWorkspaces", fields: [owner_id], references: [user_id])
+  projects      Project[]
+  tasks         Task[]
+
+  members       Member[]
+}
+
+model Account {
+  account_id   String      @id @default(uuid())
+  user_id      String 
+  provider     String
+  provider_id  String
+  refresh_token String?
+  token_expiry DateTime?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  user         User      @relation(fields: [user_id], references: [user_id])
+}
+
+model Role {
+  id           String           @id @default(uuid())   
+  name         ROLES @unique
+  permissions  Permissions[]    
+  members      Member[]  
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}
+
+model Project {
+  project_id    String       @id @default(uuid())
+  workspace_id  String         
+  created_by    String
+  name          String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  description String?
+  emoji String?
+
+
+  workspace     Workspace @relation(fields: [workspace_id], references: [workspace_id])
+  creator       User      @relation("UserCreatedProjects", fields: [created_by], references: [user_id])
+  tasks         Task[]
+
+  @@index([workspace_id])
+}
+
+model Task {
+  task_id       String       @id @default(uuid())
+  project_id    String
+  workspace_id  String         
+  created_by    String
+  assigned_to   String?
+  title         String
+  description   String?
+  status        TaskStatus  @default(BACKLOG)
+  priority      TaskPriority @default(LOW)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  dueDate DateTime?
+  project       Project   @relation(fields: [project_id], references: [project_id])
+  workspace     Workspace @relation(fields: [workspace_id], references: [workspace_id])
+  creator       User      @relation("TaskCreatedBy", fields: [created_by], references: [user_id])
+  assignee      User?     @relation("TaskAssignedTo", fields: [assigned_to], references: [user_id])
+
+  @@index([project_id])
+  @@index([workspace_id])
+  @@index([assigned_to])
+}
+
+model Member {
+  member_id     String       @id @default(uuid()) 
+  user_id       String
+  workspace_id  String         
+  role_id       String
+  joined_at     DateTime  @default(now())
+
+  user          User      @relation(fields: [user_id], references: [user_id])
+  workspace     Workspace @relation(fields: [workspace_id], references: [workspace_id])
+  role          Role      @relation(fields: [role_id], references: [id])
+
+  @@unique([user_id, workspace_id]) 
+}
+
+enum AccountProvider {
+  GITHUB
+  GOOGLE
+  EMAIL
+}
+
+enum Permissions {
+  CREATE_WORKSPACE
+  DELETE_WORKSPACE
+  EDIT_WORKSPACE
+  MANAGE_WORKSPACE_SETTINGS
+  ADD_MEMBER
+  CHANGE_MEMBER_ROLE
+  REMOVE_MEMBER
+  CREATE_PROJECT
+  EDIT_PROJECT
+  DELETE_PROJECT
+  CREATE_TASK
+  EDIT_TASK
+  DELETE_TASK
+  VIEW_ONLY
+}
+
+enum TaskStatus {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ROLES {
+  OWNER 
+  ADMIN
+  MEMBER  
+}
