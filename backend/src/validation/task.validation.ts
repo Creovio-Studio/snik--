@@ -1,15 +1,24 @@
 import { string, z } from "zod";
-import { TaskPriorityEnum, TaskStatusEnum } from "../enums/task.enum";
+import {
+  TaskPriorityEnum,
+  TaskPriorityEnumType,
+  TaskStatusEnum,
+  TaskStatusEnumType,
+} from "../enums/task.enum";
+import { TaskPriority } from "@prisma/client";
 
 export const titleSchema = z.string().trim().min(1).max(255);
 export const descriptionSchema = z.string().trim().optional();
 export const assignedToSchema = z.string().trim().min(1).nullable().optional();
 
 export const prioritySchema = z.enum(
-  Object.values(TaskPriorityEnum) as [string, ...string[]]
+  Object.values(TaskPriorityEnum) as [
+    TaskPriorityEnumType,
+    ...TaskPriorityEnumType[]
+  ]
 );
 export const statusSchema = z.enum(
-  Object.values(TaskStatusEnum) as [string, ...string[]]
+  Object.values(TaskStatusEnum) as [TaskStatusEnumType, ...TaskStatusEnumType[]]
 );
 
 export const dueDateSchema = z
