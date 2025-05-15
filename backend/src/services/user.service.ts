@@ -13,5 +13,5 @@ export const getCurrentUserService = async (userId: string) => {
     },
   });
 
-  return user;
+  return { user };
 };

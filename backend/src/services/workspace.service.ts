@@ -95,7 +95,7 @@ export const getWorksapceByIdService = async (workspaceId: string) => {
   };
 };
 
-export const getWorksapceMembersService = async (worksaceId: string) => {
+export const getWorkspaceMembersService = async (worksaceId: string) => {
   const members = await prisma.member.findFirst({
     where: { workspace_id: worksaceId },
     include: {
@@ -124,7 +124,7 @@ export const getWorksapceMembersService = async (worksaceId: string) => {
   return { members, roles };
 };
 
-export const getWorksapceAnaylticsService = async (worksapceId: string) => {
+export const getWorkspaceAnaylticsService = async (worksapceId: string) => {
   const currentDate = new Date();
 
   const totalTask = await prisma.task.count({
@@ -203,7 +203,7 @@ export const changeMemberRoleService = async (
 export const updateWorkspaceByIdService = async (
   workspaceId: string,
   name: string,
-  description: string
+  description?: string
 ) => {
   const workspace = await prisma.workspace.findFirst({
     where: { workspace_id: workspaceId },
