@@ -83,9 +83,9 @@ export type WorkspaceWithMemberType = WorkspaceType & {
       name: string;
       permissions: PermissionsType[];
     };
-  };
-  jointed_at: string;
-  created_at: string;
+    jointed_at: string;
+    created_at: string;
+  }[];
 };
 
 export type WorkspacebyIdResponseType = {
@@ -187,8 +187,8 @@ export type EditProjectPayloadType = {
 export type AllProjectPayloadType = {
   workspace_id: string;
   page_number?: number;
-  page_size: number;
-  keyword: string;
+  page_size?: number;
+  keyword?: string;
   skip?: boolean;
 };
 
