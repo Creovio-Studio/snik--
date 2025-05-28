@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useEffect } from "react";
 import useWorkspaceId from "@/hooks/use-workspace";
 import useAuth from "@/hooks/api/use-auth";

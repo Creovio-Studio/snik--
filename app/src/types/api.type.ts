@@ -18,7 +18,9 @@ export type registerType = {
   email: string;
   password: string;
 };
-
+export type GoogleLoginOrRegisterType = {
+  email: string;
+};
 export type UserType = {
   user_id: string;
   name: string;

@@ -1,3 +1,4 @@
+"use client";
 import { PermissionsType } from "@/constant";
 
 import { UserType, WorkspaceWithMemberType } from "@/types/api.type";

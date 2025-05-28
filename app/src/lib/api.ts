@@ -31,9 +31,21 @@ export const loginMutationFn = async (
   return response.data;
 };
 
-export const registerMutationFn = async (data: registerType) =>
-  await API.post("/auth/register", data);
+export const registerMutationFn = async (data: registerType) => {
+  console.log("data:", data);
+  return await API.post("/auth/register", data);
+};
 
+export const GoogleLoginOrRegisterMutationFn = async (idToken: string) =>
+  API.post(
+    "/auth/google",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+      },
+    }
+  );
 export const logoutMutationFn = async () => await API.post("/auth/logout");
 
 export const getCurrentUserQueryFn =

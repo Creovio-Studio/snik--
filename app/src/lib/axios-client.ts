@@ -1,7 +1,6 @@
 import { CustomError } from "@/types/custom-error.type";
 import axios from "axios";
-
-const baseURL = process.env.API_BASE_URL;
+import { baseURL } from "./base-url";
 
 const options = {
   baseURL,
