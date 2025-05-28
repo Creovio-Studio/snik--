@@ -22,8 +22,8 @@ model User {
 
   accounts       Account[]
   projects       Project[]  @relation("UserCreatedProjects")
-  tasksCreated   Task[]     @relation("TaskCreatedBy")
-  tasksAssigned  Task[]     @relation("TaskAssignedTo")
+  tasks_created   Task[]     @relation("TaskCreatedBy")
+  tasks_assigned  Task[]     @relation("TaskAssignedTo")
   memberships    Member[]
 
   workspaces Workspace[] @relation("UserOwnsWorkspaces")
@@ -36,7 +36,7 @@ model Workspace {
   name String
   description String?
   owner_id      String   
-  inviteCode    String    @unique
+  invite_code   String    @unique
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
 

@@ -24,12 +24,13 @@ export const registerUserController = asyncHandler(
 export const loginUserController = asyncHandler(
   async (req: Request, res: Response) => {
     const body = loginSchema.parse({ ...req.body });
-    const { userId } = await loginUserService(body);
-    await setJWT(res, userId);
+    const { user_id, current_workspace } = await loginUserService(body);
+    await setJWT(res, user_id);
 
-    return res
-      .status(HTTPSTATUS.OK)
-      .json({ message: "user login sucessfully" });
+    return res.status(HTTPSTATUS.OK).json({
+      message: "user login sucessfully",
+      user: { user_id, current_workspace },
+    });
   }
 );
 

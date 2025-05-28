@@ -32,7 +32,7 @@ export const createWorksapceService = async (
       name: name,
       description: description,
       owner_id: user.user_id,
-      inviteCode: generateInviteCode(),
+      invite_code: generateInviteCode(),
     },
   });
 

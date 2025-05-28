@@ -9,7 +9,7 @@ const appConfig = () => ({
   JWT_SECRET: getEnv("JWT_SECRET"),
   JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN"),
 
-  FRONTEND_ORIGIN: getEnv("FRONTEND_ORIGIN", "localhost"),
+  FRONTEND_ORIGIN: "http://localhost:3000",
   RANDOMERR_API_KEY: getEnv("RANDOMERR_API_KEY"),
 });
 

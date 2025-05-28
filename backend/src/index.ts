@@ -1,17 +1,16 @@
 import "dotenv/config";
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import cors from "cors";
-import session from "cookie-session";
 import { config } from "./config/app.config";
-import { ErrorCodeEnum } from "./enums/error-code.enum";
-import { HTTPSTATUS } from "./config/http.config";
 import cookieParser from "cookie-parser";
-import { getEnv } from "./utils/get-env";
-import { asyncHandler } from "./middlewares/async.handler.middleware";
-import { generateInviteCode } from "./utils/uuid";
-import { cookieOptions } from "./utils/cookie-option";
 import authRoutes from "./routes/auth.route";
 import isAuthenticated from "./middlewares/is.authenticated.middleware";
+import userRoutes from "./routes/user.route";
+import workspaceRoutes from "./routes/workspace.route";
+import memberRoutes from "./routes/member.route";
+import projectRoutes from "./routes/project.route";
+import taskRoutes from "./routes/task.route";
+
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
@@ -21,12 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use(cors({ origin: config.FRONTEND_ORIGIN }));
-app.use("/auth", authRoutes);
-
-app.get("/", isAuthenticated, (req: Request, res: Response): void => {
-  res.json({ userId: req.body.userId });
-});
+app.use(cors({ origin: config.FRONTEND_ORIGIN, credentials: true }));
+app.use(`${BASE_PATH}/auth`, authRoutes);
+app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
+app.use(`${BASE_PATH}/workspace`, isAuthenticated, workspaceRoutes);
+app.use(`${BASE_PATH}/member`, isAuthenticated, memberRoutes);
+app.use(`${BASE_PATH}/project`, isAuthenticated, projectRoutes);
+app.use(`${BASE_PATH}/task`, isAuthenticated, taskRoutes);
 
 app.listen(config.PORT, () => {
   console.log("=================================================");

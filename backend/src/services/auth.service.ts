@@ -6,7 +6,7 @@ import { generateInviteCode, generateRandomPassword } from "../utils/uuid";
 import { Roles } from "../enums/role.enum";
 import { setJWT } from "../utils/set-jwt";
 import { Response } from "express";
-import { getRandomName } from "../utils/get-random-name";
+import { getEmailName } from "../utils/get-email-name";
 
 export const registerUserService = async (body: {
   email: string;
@@ -39,7 +39,7 @@ export const registerUserService = async (body: {
           name: `My Workspace`,
           description: `Workspace created for ${user.name}`,
           owner_id: user.user_id,
-          inviteCode: generateInviteCode(),
+          invite_code: generateInviteCode(),
         },
       });
 
@@ -79,7 +79,10 @@ export const loginUserService = async (body: {
       if (!comapreValue(password, existingUser.password))
         throw new BadRequestException("Wrong Password");
 
-      return { userId: existingUser.user_id };
+      return {
+        user_id: existingUser.user_id,
+        current_workspace: existingUser.current_workspace,
+      };
     });
   } catch (error) {
     throw error;
@@ -98,7 +101,7 @@ export const googleAuthService = async (
       if (existingUser) {
         return setJWT(res, existingUser.user_id);
       } else {
-        const name = await getRandomName();
+        const name = await getEmailName(email);
         const password = await generateRandomPassword();
         const { userId } = await registerUserService({ email, name, password });
         return setJWT(res, userId);

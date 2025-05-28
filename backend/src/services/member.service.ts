@@ -43,7 +43,7 @@ export const joinWorkspaceByInviteService = async (
   inviteCode: string
 ) => {
   const workspace = await prisma.workspace.findFirst({
-    where: { inviteCode },
+    where: { invite_code: inviteCode },
   });
 
   const existingMember = await prisma.member.findFirst({
