@@ -37,6 +37,7 @@ export const loginUserController = asyncHandler(
 export const googleSignInOrLogin = asyncHandler(
   async (req: Request, res: Response) => {
     const { email }: { email?: string } = await getFirebaseToken(req);
+
     if (!email) {
       return res.status(400).json({
         success: false,
@@ -44,10 +45,12 @@ export const googleSignInOrLogin = asyncHandler(
       });
     }
 
-    await googleAuthService({ email }, res);
+    const { user } = await googleAuthService({ email }, res);
+    console.log("setted user", user);
     return res.status(200).json({
       success: true,
       message: "User authenticated successfully",
+      user,
     });
   }
 );

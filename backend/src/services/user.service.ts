@@ -1,6 +1,7 @@
 import { prisma } from "../utils/prisam";
 
 export const getCurrentUserService = async (userId: string) => {
+  console.log("fetching user with id:", userId);
   const user = await prisma.user.findFirst({
     where: {
       user_id: userId,

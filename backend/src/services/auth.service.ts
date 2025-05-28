@@ -58,6 +58,15 @@ export const registerUserService = async (body: {
         },
       });
 
+      await tx.user.update({
+        where: {
+          user_id: user.user_id,
+        },
+        data: {
+          current_workspace: workspace.workspace_id,
+        },
+      });
+
       return { userId: user.user_id, workspaceId: workspace.workspace_id };
     });
   } catch (error) {
@@ -99,12 +108,22 @@ export const googleAuthService = async (
     return prisma.$transaction(async (tx) => {
       const existingUser = await tx.user.findFirst({ where: { email } });
       if (existingUser) {
-        return setJWT(res, existingUser.user_id);
+        setJWT(res, existingUser.user_id);
+        return { user: { current_workspace: existingUser.current_workspace } };
       } else {
         const name = await getEmailName(email);
         const password = await generateRandomPassword();
-        const { userId } = await registerUserService({ email, name, password });
-        return setJWT(res, userId);
+        const { userId, workspaceId } = await registerUserService({
+          email,
+          name,
+          password,
+        });
+        setJWT(res, userId);
+        return {
+          user: {
+            current_workspace: workspaceId,
+          },
+        };
       }
     });
   } catch (error) {
