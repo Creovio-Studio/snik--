@@ -13,6 +13,12 @@ export type LoginResponseType = {
   };
 };
 
+export type GoogleLoginOrRegisterResponseType = {
+  message: string;
+  user: {
+    current_workspace: string;
+  };
+};
 export type registerType = {
   name: string;
   email: string;

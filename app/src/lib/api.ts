@@ -18,6 +18,7 @@ import {
   AllProjectPayloadType,
   AllProjectResponseType,
   EditProjectPayloadType,
+  GoogleLoginOrRegisterResponseType,
   ProjectByIdPayloadType,
   CreateTaskPayloadType,
   AllTaskPayloadType,
@@ -31,13 +32,17 @@ export const loginMutationFn = async (
   return response.data;
 };
 
-export const registerMutationFn = async (data: registerType) => {
+export const registerMutationFn = async (
+  data: registerType
+): Promise<CurrentUserResponseType> => {
   console.log("data:", data);
   return await API.post("/auth/register", data);
 };
 
-export const GoogleLoginOrRegisterMutationFn = async (idToken: string) =>
-  API.post(
+export const GoogleLoginOrRegisterMutationFn = async (
+  idToken: string
+): Promise<GoogleLoginOrRegisterResponseType> => {
+  const response = await API.post(
     "/auth/google",
     {},
     {
@@ -46,11 +51,13 @@ export const GoogleLoginOrRegisterMutationFn = async (idToken: string) =>
       },
     }
   );
+  return response.data;
+};
 export const logoutMutationFn = async () => await API.post("/auth/logout");
 
 export const getCurrentUserQueryFn =
   async (): Promise<CurrentUserResponseType> => {
-    const response = await API.post("/user/current");
+    const response = await API.get("/user/current");
     return response.data;
   };
 
