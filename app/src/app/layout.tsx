@@ -10,7 +10,7 @@ const dmSens = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Snik--",
+  title: "SNIK-",
   description: "A simple, fast, and secure Project Management s",
 };
 

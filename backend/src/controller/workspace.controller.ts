@@ -39,10 +39,10 @@ export const getAllWorkspaceUserMemberController = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.body.userId;
 
-    const { worksapces } = await getAllWorkspaceUserIsMemberService(userId);
+    const { workspaces } = await getAllWorkspaceUserIsMemberService(userId);
     return res
       .status(HTTPSTATUS.OK)
-      .json({ message: "User workspaces fetched successfully", worksapces });
+      .json({ message: "User workspaces fetched successfully", workspaces });
   }
 );
 

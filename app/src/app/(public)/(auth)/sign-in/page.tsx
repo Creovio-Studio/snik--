@@ -75,7 +75,7 @@ const SignInPage = () => {
           className=" flex items-center justify-center gap-2 self-center font-medium"
         >
           <Logo />
-          Snik-
+          SNIK-
         </Link>
 
         <div className=" flex flex-col gap-6">

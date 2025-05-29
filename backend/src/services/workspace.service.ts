@@ -65,9 +65,8 @@ export const getAllWorkspaceUserIsMemberService = async (userId: string) => {
     },
   });
 
-  const worksapces = memberships.map((membership) => membership.workspace_id);
-
-  return { worksapces };
+  const workspaces = memberships.map((membership) => membership.workspace);
+  return { workspaces };
 };
 
 export const getWorksapceByIdService = async (workspaceId: string) => {
