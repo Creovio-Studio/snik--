@@ -11,9 +11,7 @@ const GoolgeAuthButton = (props: { label: string }) => {
   const { mutate, isPending } = useMutation({
     mutationFn: GoogleLoginOrRegisterMutationFn,
     onSuccess: (data) => {
-      console.log(`${label} sucess`);
       const user = data.user;
-      console.log(data);
       router.push(`/workspace/${user.current_workspace}`);
     },
     onError: (error) => {

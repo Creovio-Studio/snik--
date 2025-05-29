@@ -1,7 +1,7 @@
 "use client";
 import Logo from "@/components/logo";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -28,7 +28,6 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 import { z } from "zod";
 import { registerMutationFn } from "@/lib/api";
-import { useAuthContext } from "@/context/auth-provider";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }),
@@ -38,13 +37,6 @@ const formSchema = z.object({
 
 const SignUpPage = () => {
   const router = useRouter();
-  const { user } = useAuthContext();
-
-  useEffect(() => {
-    if (user) {
-      router.push(`/workspace/${user.current_workspace}`);
-    }
-  }, [user, router]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

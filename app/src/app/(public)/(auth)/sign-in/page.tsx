@@ -1,7 +1,7 @@
 "use client";
 import Logo from "@/components/logo";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -28,16 +28,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 import { z } from "zod";
-import { useAuthContext } from "@/context/auth-provider";
 const SignInPage = () => {
   const router = useRouter();
-
-  const { user } = useAuthContext();
-  useEffect(() => {
-    if (user) {
-      router.push(`/workspace/${user.current_workspace}`);
-    }
-  }, [user, router]);
 
   const searchParams = useSearchParams();
   const returnUrl = searchParams.get("returnUrl");
@@ -65,9 +57,7 @@ const SignInPage = () => {
     mutate(value, {
       onSuccess: (data) => {
         const user = data.user;
-        console.log("user:", user);
         const decodeUrl = returnUrl ? decodeURIComponent(returnUrl) : null;
-        console.log("decodedUrl:", user.current_workspace);
         router.push(decodeUrl || `/workspace/${user.current_workspace}`);
       },
       onError: (error) => {

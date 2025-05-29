@@ -35,7 +35,6 @@ export const loginMutationFn = async (
 export const registerMutationFn = async (
   data: registerType
 ): Promise<CurrentUserResponseType> => {
-  console.log("data:", data);
   return await API.post("/auth/register", data);
 };
 

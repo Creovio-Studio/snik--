@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Page = () => {
   const router = useRouter();
-
   useEffect(() => {
     setTimeout(() => {
       router.push("/sign-in");
     }, 350);
-  }, [router]);
+  });
 
   return (
     <div className=" flex items-center w-full h-screen justify-center">

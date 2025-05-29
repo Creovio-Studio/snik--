@@ -1,6 +1,6 @@
 import React from "react";
 
-const AuthenticationLayout = ({ children }: { children: React.ReactNode }) => {
+const PublicRouteLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className=" flex flex-col w-full h-auto">
       <div className="w-full h-full flex items-center justify-center">
@@ -10,4 +10,4 @@ const AuthenticationLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default AuthenticationLayout;
+export default PublicRouteLayout;
