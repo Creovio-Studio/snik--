@@ -7,7 +7,6 @@ export const getCurrentUserController = asyncHandler(
     const userId = req.body.userId;
 
     const { user } = await getCurrentUserService(userId);
-    console.log("user fetched:", user);
     return res.status(HTTPSTATUS.OK).json({
       message: "User fetch successfully",
       user,

@@ -1,5 +1,5 @@
-import { parseAsBoolean, useQueryState } from "nuqs";
-
+import { useQueryState } from "nuqs";
+import { parseAsBoolean } from "nuqs/server";
 const useCreateProjcetDialog = () => {
   const [open, setOpen] = useQueryState(
     "new-project",

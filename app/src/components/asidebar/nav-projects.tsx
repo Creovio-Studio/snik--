@@ -5,6 +5,9 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuButton,
+  SidebarMenuItem,
   useSidebar,
 } from "../ui/sidebar";
 import useCreateProjcetDialog from "@/hooks/use-create-project-dialog";
@@ -16,8 +19,23 @@ import { PaginationType } from "@/types/api.type";
 import { toast } from "sonner";
 import PermissionsGuard from "../resuable/permission-guard";
 import { Permissions } from "@/constant";
-import { Loader, Plus } from "lucide-react";
+import {
+  Folder,
+  Loader,
+  MoreHorizontal,
+  MoreHorizontalIcon,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { Button } from "../ui/button";
+import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "../ui/dropdown-menu";
+import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 export function NavProjects() {
   const router = useRouter();
@@ -119,7 +137,51 @@ export function NavProjects() {
               </div>
             </>
           ) : (
-            <></>
+            projects.map((project) => {
+              const projectUrl = `/workspace/${workspaceId}/project/${project.project_id}`;
+              return (
+                <SidebarMenuItem key={project.project_id}>
+                  <SidebarMenuButton asChild isActive={projectUrl === pathname}>
+                    <Link href={projectUrl}>
+                      {project.emoji}
+                      <span>{project.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <SidebarMenuAction showOnHover>
+                        <MoreHorizontal />
+                        <span className="sr-only">More</span>
+                      </SidebarMenuAction>
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent
+                      side={isMobile ? "bottom" : "right"}
+                      align={isMobile ? "end" : "start"}
+                      className=" w-48 rounded-lg"
+                    >
+                      <DropdownMenuItem onClick={() => router.push(projectUrl)}>
+                        <Folder className="text-muted-foreground" />
+                        <span>View Project</span>
+                      </DropdownMenuItem>
+                      <PermissionsGuard
+                        requiredPermission={Permissions.DELETE_PROJECT}
+                      >
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          disabled={isLoading}
+                          onClick={() => onOpenDialog(project)}
+                        >
+                          <Trash2 className=" text-muted-foreground" />
+                          <span>Delete Project</span>
+                        </DropdownMenuItem>
+                      </PermissionsGuard>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </SidebarMenuItem>
+              );
+            })
           )}
         </SidebarMenu>
       </SidebarGroup>

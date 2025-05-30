@@ -54,9 +54,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const permissions = usePermissions(user, workspace);
   const hasPermission = (permission: PermissionsType) => {
-    console.log("permissions that user have", permissions);
-    console.log("required permission ", permission);
-    console.log(permissions.includes(permission));
     return permissions.includes(permission);
   };
 

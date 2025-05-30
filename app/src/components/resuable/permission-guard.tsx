@@ -15,9 +15,6 @@ const PermissionsGuard: React.FC<PermissionsGuardProps> = ({
 }) => {
   const { hasPermission } = useAuthContext();
 
-  console.log("required permission component,", requiredPermission);
-
-  console.log(hasPermission(requiredPermission));
   if (!hasPermission(requiredPermission)) {
     return (
       showMessage && (

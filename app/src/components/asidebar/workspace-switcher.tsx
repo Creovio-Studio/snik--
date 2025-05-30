@@ -47,10 +47,8 @@ export function WorkspaceSwitcher() {
     refetchOnMount: true,
   });
   const workspaces = data?.workspaces;
-  console.log(workspaces);
   useEffect(() => {
     if (workspaces?.length) {
-      console.log(workspaces);
       const workspace = workspaceId
         ? workspaces.find((ws) => ws.workspace_id === workspaceId)
         : workspaces[0];

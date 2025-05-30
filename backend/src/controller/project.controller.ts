@@ -40,7 +40,7 @@ export const createProjectController = asyncHandler(
 
 export const getAllProjectsInWorksapceController = asyncHandler(
   async (req: Request, res: Response) => {
-    const workspaceId = workspaceIdSchema.parse(req.params.worksapceId);
+    const workspaceId = workspaceIdSchema.parse(req.params.workspaceId);
     const userId = req.body.userId;
 
     const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
