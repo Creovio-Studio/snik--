@@ -19,14 +19,7 @@ import { PaginationType } from "@/types/api.type";
 import { toast } from "sonner";
 import PermissionsGuard from "../resuable/permission-guard";
 import { Permissions } from "@/constant";
-import {
-  Folder,
-  Loader,
-  MoreHorizontal,
-  MoreHorizontalIcon,
-  Plus,
-  Trash2,
-} from "lucide-react";
+import { Folder, Loader, MoreHorizontal, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import {
@@ -36,6 +29,7 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import { ConfirmDialog } from "../resuable/confirm-dialog";
 
 export function NavProjects() {
   const router = useRouter();
@@ -183,8 +177,34 @@ export function NavProjects() {
               );
             })
           )}
+
+          {hasMore && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className=" text-sidebar-foreground/70"
+                disabled={isFetching}
+                onClick={fetchNextPage}
+              >
+                <MoreHorizontal className=" text-sidebar-foreground/70" />
+                <span>{isFetching ? "Loading>..." : "More"}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
         </SidebarMenu>
       </SidebarGroup>
+
+      <ConfirmDialog
+        isOpen={open}
+        isLoading={isLoading}
+        onClose={onCloseDialog}
+        onConfirm={handleConfirm}
+        title="Delete Project"
+        description={`Are you sure you want to delete ${
+          context?.name || "this item"
+        }? This action cannot be undone.`}
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </>
   );
 }
