@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSens.className}`} suppressHydrationWarning>
+      <body suppressHydrationWarning={true} className={`${dmSens.className}`}>
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>
         </QueryProvider>

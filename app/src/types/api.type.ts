@@ -119,14 +119,14 @@ export type AllMembersInWorkspaceResponseType = {
       email: string;
       profile_picture: string | null;
     };
-  };
-  workspace_id: string;
-  role: {
-    id: string;
-    name: string;
-  };
-  joined_at: string;
-  created_at: string;
+    role: {
+      id: string;
+      name: string;
+    };
+    workspace_id: string;
+    joined_at: string;
+    created_at: string;
+  }[];
   roles: RoleType[];
 };
 
@@ -233,6 +233,7 @@ export type TaskType = {
     emoji: string;
     name: string;
   };
+  task_code: string;
   priority: TaskPriorityEnumType;
   status: TaskStatusEnumType;
   assigned_to: {
@@ -250,12 +251,12 @@ export type AllTaskPayloadType = {
   workspace_id: string;
   project_id?: string | null;
   keyword?: string | null;
-  priority: TaskPriorityEnumType | null;
+  priority?: TaskPriorityEnumType | null;
   status?: TaskStatusEnumType | null;
-  assigned_to: string | null;
+  assigned_to?: string | null;
   dueDate?: string;
-  page_number: number | null;
-  page_size: number | null;
+  page_number?: number | null;
+  page_size?: number | null;
 };
 
 export type AllTaskResponseType = {

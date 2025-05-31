@@ -109,13 +109,14 @@ export default function CreateProjectForm({
                 Select Emoji
               </label>
               <Popover>
-                <PopoverTrigger>
-                  <Button variant={"outline"} className=" outline">
+                <PopoverTrigger asChild>
+                  <Button type="button" variant="outline" className=" outline">
                     <div className="w-8 h-8 flex items-center justify-center">
                       <span className="text-xl">{emoji}</span>
                     </div>
                   </Button>
                 </PopoverTrigger>
+
                 <PopoverContent align="start" className="!p-0">
                   <EmojiPickerComponent onSelect={handleEmojiSelection} />
                 </PopoverContent>
