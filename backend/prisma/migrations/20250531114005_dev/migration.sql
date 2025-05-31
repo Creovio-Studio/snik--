@@ -90,6 +90,7 @@ CREATE TABLE "Task" (
     "assigned_to" TEXT,
     "title" TEXT NOT NULL,
     "description" TEXT,
+    "task_code" TEXT NOT NULL,
     "status" "TaskStatus" NOT NULL DEFAULT 'BACKLOG',
     "priority" "TaskPriority" NOT NULL DEFAULT 'LOW',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

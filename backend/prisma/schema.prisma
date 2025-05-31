@@ -94,6 +94,7 @@ model Task {
   assigned_to   String?
   title         String
   description   String?
+  task_code String 
   status        TaskStatus  @default(BACKLOG)
   priority      TaskPriority @default(LOW)
   created_at    DateTime  @default(now())

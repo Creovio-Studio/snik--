@@ -126,11 +126,11 @@ export const getWorkspaceMembersService = async (worksaceId: string) => {
 export const getWorkspaceAnaylticsService = async (worksapceId: string) => {
   const currentDate = new Date();
 
-  const totalTask = await prisma.task.count({
+  const total_task = await prisma.task.count({
     where: { workspace_id: worksapceId },
   });
 
-  const overDueTasks = await prisma.task.count({
+  const overdue_task = await prisma.task.count({
     where: {
       workspace_id: worksapceId,
       dueDate: { lt: currentDate },
@@ -138,19 +138,19 @@ export const getWorkspaceAnaylticsService = async (worksapceId: string) => {
     },
   });
 
-  const completedTasks = await prisma.task.count({
+  const completed_task = await prisma.task.count({
     where: {
       workspace_id: worksapceId,
       status: TaskStatusEnum.DONE,
     },
   });
-  const anayltics = {
-    totalTask,
-    overDueTasks,
-    completedTasks,
+  const analytics = {
+    total_task,
+    overdue_task,
+    completed_task,
   };
 
-  return { anayltics };
+  return { analytics };
 };
 
 export const changeMemberRoleService = async (

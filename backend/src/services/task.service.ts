@@ -7,6 +7,7 @@ import {
 } from "../enums/task.enum";
 import { BadRequestException, NotFoundException } from "../utils/app-error";
 import { prisma } from "../utils/prisam";
+import { generateTaskCode } from "../utils/uuid";
 
 export const createTaskService = async (
   worksapceId: string,
@@ -54,6 +55,7 @@ export const createTaskService = async (
       status: status || TaskStatusEnum.TODO,
       assigned_to: assignedTo,
       created_by: userId,
+      task_code: generateTaskCode(),
       workspace_id: worksapceId,
       project_id: projectId,
       dueDate,

@@ -89,11 +89,10 @@ export const getWorkspaceAnalyticsController = asyncHandler(
     const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
     roleGuard(role, [Permissions.VIEW_ONLY]);
 
-    const { anayltics } = await getWorkspaceAnaylticsService(workspaceId);
-
+    const { analytics } = await getWorkspaceAnaylticsService(workspaceId);
     return res.status(HTTPSTATUS.OK).json({
       message: "Workspace analtyics retrieved successfully",
-      anayltics,
+      analytics,
     });
   }
 );
