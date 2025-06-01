@@ -72,7 +72,7 @@ export const getWorkspaceMembersController = asyncHandler(
     roleGuard(role, [Permissions.VIEW_ONLY]);
 
     const { members, roles } = await getWorkspaceMembersService(workspaceId);
-
+    console.log(members);
     return res.status(HTTPSTATUS.OK).json({
       message: "Workspace members retrieved successfully",
       members,

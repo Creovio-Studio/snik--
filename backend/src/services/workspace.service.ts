@@ -95,7 +95,7 @@ export const getWorksapceByIdService = async (workspaceId: string) => {
 };
 
 export const getWorkspaceMembersService = async (worksaceId: string) => {
-  const members = await prisma.member.findFirst({
+  const members = await prisma.member.findMany({
     where: { workspace_id: worksaceId },
     include: {
       user: {

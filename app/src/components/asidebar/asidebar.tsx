@@ -40,15 +40,17 @@ const AsideBar = () => {
       <Sidebar collapsible="icon">
         <SidebarHeader className="!py-0 dark:bg-background">
           <div className=" flex h-[50px] border-b  items-center justify-start w-full">
-            <Logo url={`/workspace/${workspaceId}`} />
-            {open && (
-              <Link
-                href={`/workspace/${workspaceId}`}
-                className=" hidden md:flex ml-2 items-center gap-2 select-none font-medium"
-              >
-                SNIK-
-              </Link>
-            )}
+            <Link
+              href={`/workspace/${workspaceId}`}
+              className="flex items-center gap-2"
+            >
+              <Logo />
+              {open && (
+                <span className="hidden md:flex select-none font-medium">
+                  SNIK-
+                </span>
+              )}
+            </Link>
           </div>
         </SidebarHeader>
         <SidebarContent className=" !mt-0 dark:bg-background">

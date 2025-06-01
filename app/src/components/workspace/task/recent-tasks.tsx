@@ -8,7 +8,6 @@ import {
 import { TaskType } from "@/types/api.type";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
-import Link from "next/link";
 import { format } from "date-fns";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +26,7 @@ const RecentTasks = () => {
   const tasks: TaskType[] = data?.tasks || [];
 
   return (
-    <div className="flex pt-2 flex-col space-y-6">
+    <div className="flex pt-2 flex-col space-y-3">
       {isPending ? (
         <Loader className=" w-8 h-8 animate-spin place-self-center flex" />
       ) : null}

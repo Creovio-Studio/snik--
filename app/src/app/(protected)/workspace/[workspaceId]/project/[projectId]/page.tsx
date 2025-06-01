@@ -1,0 +1,20 @@
+import { Separator } from "@/components/ui/separator";
+import ProjectAnalytics from "@/components/workspace/project/project-analytics";
+import ProjectHeader from "@/components/workspace/project/project-header";
+import TaskTable from "@/components/workspace/task/task-table";
+import React from "react";
+
+const ProjectDetails = () => {
+  return (
+    <div className=" w-full space-y-6 py-4 md:pt-3">
+      <ProjectHeader />
+      <div className=" space-y-5">
+        <ProjectAnalytics />
+        <Separator />
+        <TaskTable />
+      </div>
+    </div>
+  );
+};
+
+export default ProjectDetails;

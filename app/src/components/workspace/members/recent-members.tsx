@@ -12,49 +12,53 @@ const RecentMembers = () => {
 
   const members = data?.members || [];
   return (
-    <div className=" flex flex-col pt-2">
+    <div className="flex flex-col pt-2">
       {isPending ? (
-        <Loader className=" w-8 h-8 animate-spin place-self-center flex"></Loader>
+        <Loader
+          className="w-8 h-8 
+        animate-spin
+        place-self-center flex"
+        />
       ) : null}
 
-      <ul role="list" className=" space-y-3">
+      <ul role="list" className="space-y-3">
         {members.map((member, index) => {
-          const name = member.user.name || " ";
+          const name = member?.user?.name || "";
           const initials = getAvatarFallbackText(name);
           const avatarColor = getAvatarColor(name);
           return (
             <li
-              role="listitem"
-              className=" flex items-center gap-4 p-3 rounded-lg border border-gray-200 hover:bg-gray-50"
               key={index}
+              role="listitem"
+              className="flex items-center gap-4 p-3 rounded-lg border border-gray-200 hover:bg-gray-50"
             >
-              <div className=" flex-shrink-0">
-                <Avatar>
+              {/* Avatar */}
+              <div className="flex-shrink-0">
+                <Avatar className="h-9 w-9 sm:flex">
                   <AvatarImage
-                    alt="Avatar"
                     src={member.user.profile_picture || ""}
+                    alt="Avatar"
                   />
-
                   <AvatarFallback className={avatarColor}>
                     {initials}
                   </AvatarFallback>
-
-                  <div className=" flex flex-col">
-                    <p className=" text-sm font-medium text-gray-900">
-                      {member.user.name}
-                    </p>
-                    <p className="text-sm text-gray-500">{member.role.name}</p>
-
-                    <div className=" ml-auto text-sm text-gray-500">
-                      <p>Joined</p>
-                      <p>
-                        {member.joined_at
-                          ? format(member.joined_at, "PPP")
-                          : null}
-                      </p>
-                    </div>
-                  </div>
                 </Avatar>
+              </div>
+
+              {/* Member Details */}
+              <div className="flex flex-col">
+                <p className="text-sm font-medium text-gray-900">
+                  {member.user.name}
+                </p>
+                <p className="text-sm text-gray-500">{member.role.name}</p>
+              </div>
+
+              {/* Joined Date */}
+              <div className="ml-auto text-sm text-gray-500">
+                <p>Joined</p>
+                <p>
+                  {member.joined_at ? format(member.joined_at, "PPP") : null}
+                </p>
               </div>
             </li>
           );

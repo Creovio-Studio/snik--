@@ -119,11 +119,11 @@ export type AllMembersInWorkspaceResponseType = {
       email: string;
       profile_picture: string | null;
     };
+    workspace_id: string;
     role: {
       id: string;
       name: string;
     };
-    workspace_id: string;
     joined_at: string;
     created_at: string;
   }[];
@@ -188,7 +188,7 @@ export type EditProjectPayloadType = {
   data: {
     emoji: string;
     name: string;
-    description: string;
+    description?: string;
   };
 };
 
@@ -216,7 +216,7 @@ export type CreateTaskPayloadType = {
   project_id: string;
   data: {
     title: string;
-    description: string;
+    description?: string;
     priority: TaskPriorityEnumType;
     status: TaskStatusEnumType;
     assigned_to: string;
