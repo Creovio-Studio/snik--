@@ -1,4 +1,3 @@
-// components/logo.tsx
 import { AudioWaveform } from "lucide-react";
 
 const Logo = () => {
