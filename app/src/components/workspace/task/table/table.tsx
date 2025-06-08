@@ -118,7 +118,6 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
   const projects = data?.projects || [];
   const members = memberData?.members || [];
 
-  //Workspace Projects
   const projectOptions = projects?.map((project) => {
     return {
       label: (

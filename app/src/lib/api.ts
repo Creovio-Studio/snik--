@@ -227,6 +227,7 @@ export const getAllTasksQueryFn = async ({
   if (page_size) queryParams.append("page_size", page_size?.toString());
   const url = queryParams.toString() ? `${baseURL}?${queryParams}` : baseURL;
   const response = await API.get(url);
+  console.log("getAllTasksQueryFn response", response.data);
   return response.data;
 };
 

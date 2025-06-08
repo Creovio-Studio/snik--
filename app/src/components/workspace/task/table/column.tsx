@@ -104,9 +104,11 @@ export const getColumns = (projectId?: string): ColumnDef<TaskType>[] => {
         <DataTableColumnHeader column={column} title="Assigned To" />
       ),
       cell: ({ row }) => {
-        const assignee = row.original.assigned_to;
+        const assignee = row.original.assignee;
         console.log(assignee);
+        console.log(assignee.name);
         const name = assignee?.name || "";
+        console.log(name);
         const initials = getAvatarFallbackText(name);
         const avatarColor = getAvatarColor(name);
 

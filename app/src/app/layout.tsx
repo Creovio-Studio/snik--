@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/context/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { AuthProvider } from "@/context/auth-provider";
 
 const dmSens = DM_Sans({
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${dmSens.className}`}>
         <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <NuqsAdapter>{children}</NuqsAdapter>
+          </AuthProvider>
         </QueryProvider>
         <Toaster />
       </body>

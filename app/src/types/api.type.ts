@@ -236,7 +236,7 @@ export type TaskType = {
   task_code: string;
   priority: TaskPriorityEnumType;
   status: TaskStatusEnumType;
-  assigned_to: {
+  assignee: {
     user_id: string;
     name: string;
     profile_picture: string | null;
