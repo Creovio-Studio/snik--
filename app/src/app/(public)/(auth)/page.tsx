@@ -164,7 +164,11 @@ const SignInPage = () => {
                     <div className=" text-center text-sm">
                       Don&apos; have an account?{" "}
                       <Link
-                        href={"/sign-up"}
+                        href={
+                          returnUrl
+                            ? `/sign-up?returnUrl=${returnUrl}`
+                            : "/sign-up"
+                        }
                         className="underline underline-offset-4"
                       >
                         Sign Up

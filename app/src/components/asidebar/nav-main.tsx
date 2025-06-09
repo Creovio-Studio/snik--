@@ -15,8 +15,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "../ui/sidebar";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type ItemType = {
   title: string;
@@ -30,6 +32,8 @@ const NavMain = () => {
   );
   const workspaceId = useWorkspaceId();
   const pathname = usePathname();
+
+  const { open } = useSidebar();
 
   const items: ItemType[] = [
     {
@@ -60,16 +64,25 @@ const NavMain = () => {
   ];
 
   return (
-    <div>
+    <div className="">
       <SidebarGroup>
-        <SidebarMenu>
+        <SidebarMenu
+          className={cn(
+            "flex flex-1 flex-col py-2 w-full",
+            open ? "md:items-start" : "items-center"
+          )}
+        >
           {items.map((item) => {
             return (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton isActive={item.url === pathname} asChild>
-                  <Link href={item.url} className="!text-[15px]">
+                <SidebarMenuButton
+                  className=""
+                  isActive={item.url === pathname}
+                  asChild
+                >
+                  <Link href={item.url} className="w-full px-3 py-2">
                     <item.icon />
-                    <span>{item.title}</span>
+                    <span className="hidden md:inline">{item.title}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

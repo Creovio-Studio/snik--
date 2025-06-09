@@ -58,11 +58,8 @@ export type WorkspaceType = {
 };
 
 export type CreateWorkspaceType = {
-  workspace_id: string;
-  data: {
-    name: string;
-    description: string;
-  };
+  name: string;
+  description: string;
 };
 
 export type CreateWorkspaceResponseType = {

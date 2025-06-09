@@ -37,7 +37,7 @@ const AsideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" className="">
         <SidebarHeader className="!py-0 dark:bg-background">
           <div className=" flex h-[50px] border-b  items-center justify-start w-full">
             <Link
@@ -53,11 +53,11 @@ const AsideBar = () => {
             </Link>
           </div>
         </SidebarHeader>
-        <SidebarContent className=" !mt-0 dark:bg-background">
-          <SidebarGroup className=" !py-0">
+        <SidebarContent className="dark:bg-background">
+          <SidebarGroup className="">
             <SidebarGroupContent>
               <WorkspaceSwitcher />
-              <Separator />
+              <Separator className=" my-2" />
               <NavMain />
               <Separator />
               <NavProjects />

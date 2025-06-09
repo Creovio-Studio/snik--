@@ -47,7 +47,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const workspace = workspaceData?.workspace;
 
   useEffect(() => {
-    if (workspaceError?.errorCode === "ACCESS_UNAUTHORIZED" || authError) {
+    console.log(workspaceError);
+    if (workspaceError?.errorCode === "ACCESS_UNAUTHORIZED") {
       router.push("/");
     }
   }, [workspaceError, router, authError]);

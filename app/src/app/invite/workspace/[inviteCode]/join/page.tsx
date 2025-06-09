@@ -47,7 +47,8 @@ const InvitePage = () => {
         queryClient.resetQueries({
           queryKey: ["userWorkpsaces"],
         });
-        router.push(`workspace/${data.workspace_id}`);
+        console.log("Joined workspace successfully", data);
+        router.push(`/workspace/${data.workspace_id}`);
       },
       onError: (error) => {
         toast.error("Error", { description: error.message || "" });
