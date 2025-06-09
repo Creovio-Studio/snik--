@@ -7,8 +7,7 @@ const appConfig = () => ({
   DATABASE_URL: getEnv("DATABASE_URL"),
 
   JWT_SECRET: getEnv("JWT_SECRET"),
-  JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN"),
-
+  JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN", "30d"),
   FRONTEND_ORIGIN: "http://localhost:3000",
   RANDOMERR_API_KEY: getEnv("RANDOMERR_API_KEY"),
 });

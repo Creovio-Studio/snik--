@@ -49,6 +49,7 @@ export const joinWorkspaceByInviteService = async (
   const existingMember = await prisma.member.findFirst({
     where: {
       user_id: userId,
+      workspace_id: workspace?.workspace_id,
     },
   });
 
@@ -70,5 +71,6 @@ export const joinWorkspaceByInviteService = async (
       joined_at: new Date(),
     },
   });
+
   return { workspaceId: workspace!.workspace_id, role: role.name };
 };

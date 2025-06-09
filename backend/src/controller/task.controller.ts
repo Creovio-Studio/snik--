@@ -79,14 +79,14 @@ export const getAllTasksController = asyncHandler(
     const workspaceId = workspaceIdSchema.parse(req.params.workspaceId);
 
     const filters = {
-      projectId: req.query.projectId as string | undefined,
+      projectId: req.query.project_id as string | undefined,
       status: req.query.status
         ? (req.query.status as string)?.split(",")
         : undefined,
       priority: req.query.priority
         ? (req.query.priority as string)?.split(",")
         : undefined,
-      assigned_to: req.query.assignedTo
+      assigned_to: req.query.assigned_to
         ? (req.query.assignedTo as string)?.split(",")
         : undefined,
       keyword: req.query.keyword as string | undefined,
